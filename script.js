@@ -16,4 +16,24 @@ mobileMenu?.querySelectorAll('a').forEach((link) => {
   });
 });
 
+const serviceCards = [...document.querySelectorAll('.service-card')];
+
+const selectServiceCard = (selectedCard) => {
+  serviceCards.forEach((card) => {
+    const isSelected = card === selectedCard;
+    card.classList.toggle('service-featured', isSelected);
+    card.setAttribute('aria-pressed', String(isSelected));
+  });
+};
+
+serviceCards.forEach((card) => {
+  card.addEventListener('click', () => selectServiceCard(card));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectServiceCard(card);
+    }
+  });
+});
+
 document.querySelector('#year').textContent = new Date().getFullYear();
